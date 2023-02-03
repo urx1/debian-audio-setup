@@ -1,0 +1,41 @@
+#update system
+sudo apt update && sudo apt upgrade
+
+#install dependencies for kxstudio repos
+sudo apt-get install apt-transport-https gpgv wget
+
+#download repo files
+wget https://launchpad.net/~kxstudio-debian/+archive/kxstudio/+files/kxstudio-repos_11.1.0_all.deb
+
+#install repo files
+sudo dpkg -i kxstudio-repos_11.1.0_all.deb
+
+#install jack2
+sudo apt install jack2
+
+#enable realtime priority
+sudo nano /etc/security/limits.d
+#OR
+sudo nano /etc/security/limits.conf
+#add lines w tabs in between
+@audio	-	rtprio	95
+@audio	-	memlock	unlimited
+
+#create audio group as root
+groupadd audio
+#add user to audio group
+usermod -a -G audio username
+#reboot
+sudo reboot now
+
+#install cadence to control the jack server
+sudo apt install cadence
+#OR use qjackctl
+sudo apt install qjackctl
+
+#install daw / software
+sudo apt install ardour hydrogen guitarix 
+
+#install plugins
+sudo apt install ardour-lv2-plugins x42-plugins arctician-plugins-lv2 avldrums.lv2 artyfx calf-plugins cardinal-lv2 dpf-plugins dragonfly-reverb drumgizmo eq10q infamous-plugins invada-studio--plugins-lv2 lsp-plugins luftikus-lv2 zam-plugins 
+
